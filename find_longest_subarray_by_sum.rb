@@ -8,25 +8,24 @@
 arr = [1, 2, 3, 4, 5, 0, 0, 0, 6, 7, 8, 9, 10]
 s = 15
 ##### OUTPUT #####
-[2, 4]
+[1, 8]
 
-# Time complexity: T(n) =
-# Space complexity: S(n) =
+# Time complexity: T(n) = (n)*(n-1) = O(n^2-n)
+# Space complexity: S(n) = O(1)
 def first_solution(arr, s)
   longest_solution_size = 0
   i1, i2 = 0
 
   arr.each_with_index do |i, index|
-    # return if index - 1 == arr.size
     sum = i
     current_solution_size = 0
-    (index..arr.size - 1).each do |j|
+    (index + 1..arr.size - 1).each do |j|
       sum += arr[j]
       current_solution_size += 1
 
-      next unless sum == s && j + 1 < arr.size && arr[j + 1] + sum > s && current_solution_size > longest_solution_size
-
-      puts "SUM=#{sum} CURRENT=#{current_solution_size} I=#{i} INDEX=#{index} J=#{j} ARR[j]=#{arr[j]}"
+      next unless sum == s &&
+        j + 1 < arr.size && arr[j + 1] + sum > s &&
+        current_solution_size > longest_solution_size
 
       longest_solution_size = current_solution_size
       i1 = index + 1
@@ -38,4 +37,28 @@ def first_solution(arr, s)
   [i1, i2]
 end
 
+# Time complexity: T(n) = O(n)
+# Space complexity: S(n) = O(1)
+def second_solution(arr, s)
+  left = 0
+  right = 0 
+  sum = left
+  result = [-1,-1]
+
+  while (right < arr.size) do
+    sum += arr[right]
+    while (left < right && sum > s)
+      left += 1
+      sum -= arr[left]
+    end
+    if (sum == s && (result[1] - result[0] < right - left))
+      result = [left+1,right+1]
+    end
+    right+=1
+  end
+
+  result
+end
+
 puts "First solution: #{first_solution(arr, s)}"
+puts "Second solution: #{second_solution(arr, s)}"
