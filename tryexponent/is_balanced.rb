@@ -32,11 +32,12 @@ def is_balanced(node)
   is_balanced(node.left) && is_balanced(node.right)
 end
 
+# T(n) = O(n) if we touch all nodes
 def get_height(node)
   return 0 if node.nil?
 
-  left = maximum_height(node.left)
-  right = maximum_height(node.right)
+  left = get_height(node.left)
+  right = get_height(node.right)
 
   [left, right].max + 1
 end
