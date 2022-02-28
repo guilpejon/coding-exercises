@@ -11,11 +11,11 @@ output2 = false
 # Time complexity: T(n) = O(n)
 # Space complexity: S(n) = O(1)
 # HASH
-def first_solution(string1)
-  string1 = string1.tr(' ','')
+def first_solution(string)
+  string = string.tr(' ','')
 
   hash = Hash.new(0)
-  string1.downcase.chars.each do |c|
+  string.downcase.chars.each do |c|
     hash[c] += 1
   end
 
@@ -29,12 +29,12 @@ end
 # Time complexity: T(n) = O(n)
 # Space complexity: S(n) = O(1)
 # HASH
-def second_solution(string1)
-  string1 = string1.tr(' ','')
+def second_solution(string)
+  string = string.tr(' ','')
 
   hash = Hash.new(0)
   odd_letters = 0
-  string1.downcase.chars.each do |c|
+  string.downcase.chars.each do |c|
     hash[c] += 1
 
     if hash[c] % 2 != 0
@@ -49,9 +49,13 @@ def second_solution(string1)
   false
 end
 
-# Time complexity: T(n) =
+# Time complexity: T(n) = O()
 # Space complexity: S(n) =
-def third_solution(string1)
+def third_solution(string)
+  n = string.size
+  return true if n == 1 || 0
+
+  return string[0] == string[n-1] && third_solution(string[1..n-2])
 end
 
 puts "###############################"
