@@ -1,4 +1,5 @@
-# Given sorted array, find smallest greater number after x
+# Given a sorted array, find the index of the first element >= X 
+# (return -1 if no element >= X)
 
 def lower_bound(arr, x)
   left = 0
